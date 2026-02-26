@@ -48,28 +48,47 @@ function App() {
   }
   return (
     <div>
-      <h1>Hello, my name is Toma!</h1>
+      <Header />
       <p>My name is {studentName}</p>
       <p>Welcome to {courseTitle}, {studentName}!</p>
-      <label htmlFor="studentInpur">Enter your name</label>
-      <input type="text" id="studentInput"/>
       <p>Student Name: {student.name}</p>
       <p>Age: {student.age}</p>
       <p>Track: {student.track}</p>
       <p>{sayHello()}</p>
-      {stories.map((story) => (
-         <div key={story.objectID}>
-    <h3>
-      <a href={story.url} target="_blank" rel="noopener noreferrer">
-        {story.title}
-      </a>
-    </h3>
-    <p>Author: {story.author}</p>
-    <p>Points: {story.points}</p>
-    <p>Comments: {story.num_comments}</p>
-  </div>
-))}
+      <List />
+      <Search />
     </div>
+  )
+}
+function List() {
+  return (
+    <div>
+      {stories.map((story) => (
+        <div key={story.objectID}>
+          <h3>
+            <a href={story.url} target="_blank" rel="noopener noreferrer">
+              {story.title}
+            </a>
+          </h3>
+          <p>Author: {story.author}</p>
+          <p>Points: {story.points}</p>
+          <p>Comments: {story.num_comments}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+function Search() {
+  return (
+    <div>
+      <label htmlFor="studentInput">Enter your name</label>
+      <input type="text" id="studentInput" />
+    </div>
+  )
+}
+function Header() {
+  return (
+    <h1>Hacker News Clone</h1>
   )
 }
 
@@ -82,3 +101,16 @@ export default App
 
 // One mistake I made and fixed:
 // I initially tried to render the whole object {student} directly, which caused an error, so I switched to using {student.name}, {student.age}, etc.
+//----------------
+/*
+Reflection:
+
+1. App is now responsible for organizing and rendering the main layout.
+
+2. List is responsible only for displaying the stories.
+
+3. Search is responsible only for rendering the input UI.
+
+4. This structure is cleaner because each component has a single responsibility, 
+   making the code easier to read, maintain, and scale.
+*/
