@@ -12,6 +12,7 @@ Reason: Using objectID ensures each element has a stable, unique key for React's
 
 This structure is realistic because real APIs like Hacker News return each story as an object with these exact properties.
 */
+import './App.css'
 const stories = [
   {
     objectID: 1,
@@ -30,22 +31,21 @@ const stories = [
     num_comments: 25
   },
   {
-  objectID: 3,
-  title: "JavaScript ES2024 Features",
-  url: "https://example.com/es2024",
-  author: "TC39",
-  points: 200,
-  num_comments: 45
-}
+    objectID: 3,
+    title: "JavaScript ES2024 Features",
+    url: "https://example.com/es2024",
+    author: "TC39",
+    points: 200,
+    num_comments: 45
+  }
 ]
-import './App.css'
+
 const courseTitle = "React Basics"
-function App() {
+const App = () => {
   const studentName = "Fatma"
   const student = { name: "Fatma", age: 20, track: "Web Development" }
-  function sayHello() {
-    return `Hello, ${studentName}! Welcome to ${courseTitle}.`
-  }
+  const sayHello = () => `Hello, ${studentName}! Welcome to ${courseTitle}.`
+
   return (
     <div>
       <Header />
@@ -60,39 +60,42 @@ function App() {
     </div>
   )
 }
-function List() {
-  return (
-    <div>
-      {stories.map((story) => (
-        <div key={story.objectID}>
-          <h3>
-            <a href={story.url} target="_blank" rel="noopener noreferrer">
-              {story.title}
-            </a>
-          </h3>
-          <p>Author: {story.author}</p>
-          <p>Points: {story.points}</p>
-          <p>Comments: {story.num_comments}</p>
-        </div>
-      ))}
-    </div>
-  )
-}
-function Search() {
+
+const List = () => (
+  <div>
+    {stories.map(story => (
+      <div key={story.objectID}>
+        <h3>
+          <a href={story.url} target="_blank" rel="noopener noreferrer">
+            {story.title}
+          </a>
+        </h3>
+        <p>Author: {story.author}</p>
+        <p>Points: {story.points}</p>
+        <p>Comments: {story.num_comments}</p>
+      </div>
+    ))}
+  </div>
+)
+
+const Search = () => {
+  const handleChange = (event) => {
+    console.log(event.target.value) 
+    console.log("User is typing!")   
+  }
+
   return (
     <div>
       <label htmlFor="studentInput">Enter your name</label>
-      <input type="text" id="studentInput" />
+      <input type="text" id="studentInput" onChange={handleChange} />
     </div>
   )
 }
-function Header() {
-  return (
-    <h1>Hacker News Clone</h1>
-  )
-}
+
+const Header = () => <h1>Hacker News Clone</h1>
 
 export default App
+
 // One thing I understand well in this lab:
 // I understand how to create a functional component and display variables inside JSX.
 
@@ -113,4 +116,12 @@ Reflection:
 
 4. This structure is cleaner because each component has a single responsibility, 
    making the code easier to read, maintain, and scale.
+*/
+//---------------------------------------------------//
+/*
+Warm-up:
+
+1. Regular functions use the `function` keyword; arrow functions use `=>`.
+2. Arrow functions are common in React because they preserve `this` context and allow concise syntax.
+3. When a user types inside an input field, the input’s value changes, and React can capture that via an event object.
 */
